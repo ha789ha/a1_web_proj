@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>My Page</title>
+</head>
+<body class="center-container">
+  <h1>Dataset</h1>
+  <div class ='info'>
+  <p>이 데이터셋은 2023년 스포티파이에서 가장 유명한 노래들을 포괄적으로 담고 있으며 일반적인 데이터셋보다 더 다양한 기능을 제공합니다.<br>
+    아티스트 정보, 발매일, 스포티파이 재생 목록 및 차트, 그리고 스트리밍 통계 등 다양한 정보가 포함되어 있습니다.</p>
+  </div>
+
+  <h1>키 속성</h1>
+  <ul>
+    <li>Track Name: Name of the song</li>
+    <li>Artist(s) Name: Name of the artist(s) of the song</li>
+    <li>Artist Count: Number of artists contributing to the song</li>
+    <li>Released Year: Year when the song was released</li>
+    <li>Released Month: Month when the song was released</li>
+    <li>Released Day: Day of the month when the song was released</li>
+    <li>In Spotify Playlists: Number of Spotify playlists the song is included in</li>
+    <li>In Spotify Charts: Presence and rank of the song on Spotify charts</li>
+    <li>Streams: Total number of streams on Spotify</li>
+    <li>In Apple Playlists: Number of Apple Music playlists the song is included in</li>
+    <li>In Apple Charts: Presence and rank of the song on Apple Music charts</li>
+    <li>In Deezer Playlists: Number of Deezer playlists the song is included in</li>
+    <li>In Deezer Charts: Presence and rank of the song on Deezer charts</li>
+    <li>In Shazam Charts: Presence and rank of the song on Shazam charts</li>
+    <li>BPM: Beats per minute, a measure of song tempo</li>
+    <li>Key: Key of the song</li>
+    <li>Mode: Mode of the song (major or minor)</li>
+    <li>Danceability %: Percentage indicating how suitable the song is for dancing</li>
+    <li>Valence %: Positivity of the song's musical content</li>
+    <li>Energy %: Perceived energy level of the song</li>
+    <li>Acousticness %: Amount of acoustic sound in the song</li>
+    <li>Instrumentalness %: Amount of instrumental content in the song</li>
+    <li>Liveness %: Presence of live performance elements</li>
+    <li>Speechiness %: Amount of spoken words in the song</li>
+</ul>
+
+  <h1>EDA</h1>
+  <h1>1. 각 음악 플랫폼의 상위 50개 음악들은 주로 언제 발매되었는가?</h1>
+
+
+  <div class="image-container">
+    <h2>애플</h2>
+    <img src="{% static 'img/pieplot/apple_image1.png' %}" alt="애플 이미지 1" class='image'>
+    <img src="{% static 'img/pieplot/apple_image2.png' %}" alt="애플 이미지 2" class='image'>
+  </div>
+
+  <div class="image-container">
+    <h2>스포티파이</h2>
+    
+    <img src="{% static 'img/pieplot/spotify_image1.png' %}" alt="스포티파이 이미지 1" class='image'>
+    <img src="{% static 'img/pieplot/spotify_image2.png' %}" alt="스포티파이 이미지 2" class='image'>
+  </div>
+
+  <div class="image-container">
+    <h2>Deezer</h2>
+    <img src="{% static 'img/pieplot/deezer_image1.png' %}" alt="Deezer 이미지 1" class='image'>
+    <img src="{% static 'img/pieplot/deezer_image2.png' %}" alt="Deezer 이미지 2" class='image'>
+  </div>
+  <hr>
+
+  <h1>2. 각 플랫폼별 인기 음악들은 특징이 서로 다른가?  </h1>
+  <p style="text-align: left;">- 플레이리스트 시간을 기준으로,상위 50개를 각 플랫폼에서 가져온다.
+    단, 플레이리스트값이 100 미만인 경우 상위 50개에 속하더라도 제외한다.</p>
+  <p style="text-align: left !important;">- 각 플랫폼에 대해서 음악적 특징에 대해 box plot을 그린다.</p>
+
+  <div class="image-container">
+    <img src="{% static 'img/boxplot_playlist_platform.png' %}" class='bar_image' >
+  </div>
+  <h2>분석 결과 </h2>
+    <p style="text-align: left;">대부분의 지표에서는 큰 차이를 느끼기 어려웠으나, Deezer 플랫폼의 경우 acousticness_%,
+         즉 노래에서 반주가 차지하는 비중이<br> 타 플랫폼에 비해 높은 값을 가지고 있었다.</p>
+   <p style="text-align: left !important;">또한 모든 플랫폼에서 인기인는 음악의 경우 대부분이 instrumentalness_%, 
+    즉 노래에서 악기가 차지하는 비중이 매우 낮은것을<br> 볼 수 있었다.</p>
+  <hr>
+
+  <h1 style="text-align: left !important;">3. 코로나 기간 전/후의 음악들은 특징이 서로 다른가?</h1>
+  <div class="image-container">
+    <img src="{% static 'img/covid_vs.png' %}" class='bar_image' >
+  </div>
+
+  <ol>
+    <li>년도별로 음악적인 특징의 차이가 클 수 있으므로, 코로나 기간 전의 당시 트렌드에 해당하는 음악들만 가져오기 위해<br> 코로나 전의 음악들은 2018년부터 2019년까지의 음악을 대상으로 한다.</li>
+    <li>코로나 이후는 2020년부터 2022년까지의 음악을 대상으로 한다.</li>
+    <li>각 범주에 대해서 음악적 특지엥 대해 box plot을 그린다.</li>
+  </ol>
+
+  <h2>분석 결과 </h2>
+  <p style="text-align: left;">코로나 전과 비교하여 코로나 이후의 음악들의 dancability, energy가 증가함을 보였고, 
+    반주의 비율이 감소함을 알 수 있었다.<br> 또한 speechiness도 증가하였다.</p>
+  <hr>
+
+    <h1 style="text-align: left !important;">4. Major VS Minor</h1>
+    <div class="image-container">
+      <img src="{% static 'img/genre.png' %}" class='bar_image' >
+    </div>
+    <h2>분석 결과 </h2>
+    <p style="text-align: left;">메이저 장르는 813곡, 마이너 장르는 666곡으로 메이저 장르가 마이너 장르보다 약간 많음을 확인할 수 있다.</p>
+  <hr>
+
+  <h1 style="text-align: left !important;">5. 각 노래들의 특징에는 어떤 상관관계가 있을까?</h1>
+  <p style="text-align: left;">1) Heatmap의 correlation 이 유의미하게 나온 특징들 중심으로 관계 파악</p>
+  
+  <div class="image-container">
+    <img src="{% static 'img/Correlation.png' %}" class='rank_image'>
+  </div>
+
+  <p style="text-align: left;">2) danceability vs. valence, energy, acousticness, speeciness</p>
+  
+  <div class="image-container">
+    <img src="{% static 'img/danceability vs..png' %}" class='rank_image'>
+  </div>
+
+  <p style="text-align: left;">3) energy vs. valence, acousticness, liveness, bpm</p>
+  
+  <div class="image-container">
+    <img src="{% static 'img/energy vs..png' %}" class='rank_image'>
+  </div>
+
+  <h2>분석 결과 </h2>
+  <ul>
+    <li>danceability는 energy, acousticness, speechness와 관련이 있다는 것을 볼 수 있다.<br>
+      energy가 클수록, acousticness와 speechness가 작을수록 높은 danceability를 가지는 경향이 있다.</li>
+    <li>energy는 acousticness, liveness와 관련이 있다는 것을 볼 수 있다. acousticness가 작을수록,<br>
+      liveness가 작을 수록 높은 energy를 가지는 경향이 있다. 특히 bpm이 energy와 그다지 관계가 없다는 것이 흥미로웠다.</li>
+  </ul>
+</body>
+</html>

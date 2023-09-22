@@ -1,0 +1,52 @@
+body {
+    overflow: scroll;
+}
+
+hr {
+    border: 1px solid #CCCCCC !important; 
+    margin: 20px 0; 
+    width: 1000px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+.info{
+    border-radius: 30px;
+    background-color: gray';
+}
+.image {
+    width: 400px;
+    height: auto;
+}
+
+p {
+    font-size: 16px; 
+    font-weight: normal;
+}
+
+.bar_image {
+    width: 1000px;
+    height: auto;
+}
+
+.rank_image {
+    width: 700px;
+    height: auto;
+}
+.content {
+    text-align: left; /* 텍스트를 왼쪽으로 정렬 */
+    margin: 0; /* 좌측 여백을 없앰 */
+}
+
+li {
+    margin-bottom: 10px; /* 항목 사이의 여백 조정 */
+}
